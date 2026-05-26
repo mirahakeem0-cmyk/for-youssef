@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>For Youssef 🤍</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#ffd6e7,#fff);
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    text-align:center;
+    width:90%;
+    max-width:600px;
+    padding:40px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.4);
+    backdrop-filter:blur(10px);
+    box-shadow:0 8px 30px rgba(0,0,0,0.1);
+    position:relative;
+}
+
+h1{
+    font-size:2.2rem;
+    color:#ff4f8b;
+    margin-bottom:30px;
+}
+
+p{
+    font-size:1.2rem;
+    margin-bottom:25px;
+    color:#444;
+}
+
+.buttons{
+    position:relative;
+    height:120px;
+}
+
+button{
+    padding:15px 30px;
+    border:none;
+    border-radius:50px;
+    font-size:1rem;
+    cursor:pointer;
+    transition:0.3s;
+    position:absolute;
+}
+
+.yes{
+    background:#ff4f8b;
+    color:white;
+    left:35%;
+}
+
+.no{
+    background:#222;
+    color:white;
+    left:60%;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.hidden{
+    display:none;
+}
+
+.slider-container{
+    margin-top:20px;
+}
+
+input[type="range"]{
+    width:100%;
+}
+
+.time-buttons{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.time-buttons button{
+    position:relative;
+    left:auto;
+}
+
+.final-message{
+    font-size:3rem;
+    color:#ff2e74;
+    animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
+.heart{
+    position:absolute;
+    color:#ff4f8b;
+    font-size:25px;
+    animation:float 5s linear infinite;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-800px);
+        opacity:0;
+    }
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    pointer-events:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="container">
+
+    <!-- STEP 1 -->
+    <div id="step1">
+        <h1>هاي يوسف… ممكن تسامحني؟ 🤍</h1>
+
+        <div class="buttons">
+            <button class="yes" onclick="nextStep(2)">Yes 💖</button>
+            <button class="no" id="noBtn">No 😭</button>
+        </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="step2" class="hidden">
+        <h1>بتحب باباك ومامتك قد ايه؟ ❤️</h1>
+
+        <div class="slider-container">
+            <input type="range" min="0" max="100" value="100">
+        </div>
+
+        <br>
+        <button class="yes" style="position:relative;left:auto;" onclick="nextStep(3)">
+            Next 🤍
+        </button>
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="step3" class="hidden">
+        <h1>طيب… بتحبني أنا قد ايه؟ 🤍</h1>
+
+        <div class="slider-container">
+            <input type="range" min="0" max="100" value="100">
+        </div>
+
+        <br>
+        <button class="yes" style="position:relative;left:auto;" onclick="nextStep(4)">
+            A lot 😭💖
+        </button>
+    </div>
+
+    <!-- STEP 4 -->
+    <div id="step4" class="hidden">
+        <h1>طيب ممكن ننزل بكرا؟ 🥺🤍</h1>
+
+        <div class="buttons">
+            <button class="yes" onclick="nextStep(5)">آه طبعًا 😌</button>
+            <button class="no" id="noBtn2">No 😭</button>
+        </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div id="step5" class="hidden">
+        <h1>اختار الميعاد بقى 👀</h1>
+
+        <div class="time-buttons">
+            <button class="yes" onclick="nextStep(6)">4:00 PM ☕</button>
+            <button class="yes" onclick="nextStep(6)">6:00 PM 🌆</button>
+            <button class="yes" onclick="nextStep(6)">8:00 PM 🍽️</button>
+        </div>
+    </div>
+
+    <!-- FINAL -->
+    <div id="step6" class="hidden">
+        <h1 class="final-message">I Love You More 🤍</h1>
+        <p>See you tomorrow 😌✨</p>
+    </div>
+
+</div>
+
+<script>
+
+// STEPS
+function nextStep(step){
+
+    for(let i=1;i<=6;i++){
+        document.getElementById(`step${i}`).classList.add("hidden");
+    }
+
+    document.getElementById(`step${step}`).classList.remove("hidden");
+
+    createHearts();
+
+}
+
+// RUN HEARTS
+function createHearts(){
+
+    for(let i=0;i<20;i++){
+
+        let heart=document.createElement("div");
+
+        heart.classList.add("heart");
+
+        heart.innerHTML="💖";
+
+        heart.style.left=Math.random()*100+"vw";
+
+        heart.style.top="100vh";
+
+        heart.style.fontSize=(20+Math.random()*30)+"px";
+
+        heart.style.animationDuration=(3+Math.random()*3)+"s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },5000);
+
+    }
+
+}
+
+// RUNAWAY BUTTON
+const noBtn=document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover",()=>{
+
+    noBtn.style.top=Math.random()*80+"px";
+    noBtn.style.left=Math.random()*80+"%";
+
+    noBtn.innerHTML=[
+        "لا كدا مينفعش 😭",
+        "مش هتعرف تدوس 😌",
+        "يوسف الطيب مستحيل 😭",
+        "فكر تاني 👀"
+    ][Math.floor(Math.random()*4)];
+
+});
+
+const noBtn2=document.getElementById("noBtn2");
+
+noBtn2.addEventListener("mouseover",()=>{
+
+    noBtn2.style.top=Math.random()*80+"px";
+    noBtn2.style.left=Math.random()*80+"%";
+
+});
+
+// SIMPLE FIREWORKS
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+function fireworks(){
+
+    for(let i=0;i<100;i++){
+
+        ctx.beginPath();
+
+        ctx.arc(
+            Math.random()*canvas.width,
+            Math.random()*canvas.height,
+            3,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle=`hsl(${Math.random()*360},100%,70%)`;
+        ctx.fill();
+
+    }
+
+}
+
+setInterval(fireworks,1000);
+
+</script>
+
+</body>
+</html>
