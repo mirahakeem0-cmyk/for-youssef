@@ -1,146 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Youssef 🤍</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-    background:linear-gradient(135deg,#ffd6e7,#fff);
-    overflow:hidden;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(-45deg,#ffb6d5,#ffffff,#ffd6e7,#fff);
+background-size:400% 400%;
+animation:gradient 10s ease infinite;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 
 .container{
-    text-align:center;
-    width:90%;
-    max-width:600px;
-    padding:40px;
-    border-radius:30px;
-    background:rgba(255,255,255,0.4);
-    backdrop-filter:blur(10px);
-    box-shadow:0 8px 30px rgba(0,0,0,0.1);
-    position:relative;
+width:90%;
+max-width:600px;
+padding:35px;
+background:rgba(255,255,255,0.4);
+backdrop-filter:blur(12px);
+border-radius:25px;
+box-shadow:0 10px 40px rgba(0,0,0,0.1);
+text-align:center;
+position:relative;
 }
 
 h1{
-    font-size:2.2rem;
-    color:#ff4f8b;
-    margin-bottom:30px;
-}
-
-p{
-    font-size:1.2rem;
-    margin-bottom:25px;
-    color:#444;
-}
-
-.buttons{
-    position:relative;
-    height:120px;
+color:#ff3b7f;
+margin-bottom:20px;
 }
 
 button{
-    padding:15px 30px;
-    border:none;
-    border-radius:50px;
-    font-size:1rem;
-    cursor:pointer;
-    transition:0.3s;
-    position:absolute;
+padding:12px 25px;
+border:none;
+border-radius:40px;
+cursor:pointer;
+font-size:16px;
+transition:0.3s;
+position:absolute;
 }
 
 .yes{
-    background:#ff4f8b;
-    color:white;
-    left:35%;
+background:#ff3b7f;
+color:white;
+left:35%;
 }
 
 .no{
-    background:#222;
-    color:white;
-    left:60%;
+background:#222;
+color:white;
+left:60%;
 }
 
 button:hover{
-    transform:scale(1.05);
+transform:scale(1.05);
 }
 
-.hidden{
-    display:none;
+.hidden{display:none;}
+
+.buttons{height:120px;position:relative;}
+
+.slider{
+width:100%;
 }
 
-.slider-container{
-    margin-top:20px;
-}
-
-input[type="range"]{
-    width:100%;
-}
-
-.time-buttons{
-    display:flex;
-    gap:15px;
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-.time-buttons button{
-    position:relative;
-    left:auto;
-}
-
-.final-message{
-    font-size:3rem;
-    color:#ff2e74;
-    animation:pulse 1s infinite;
+.final{
+font-size:2.5rem;
+color:#ff2d75;
+animation:pulse 1s infinite;
 }
 
 @keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-    100%{transform:scale(1);}
+0%{transform:scale(1)}
+50%{transform:scale(1.1)}
+100%{transform:scale(1)}
 }
 
 .heart{
-    position:absolute;
-    color:#ff4f8b;
-    font-size:25px;
-    animation:float 5s linear infinite;
+position:absolute;
+font-size:20px;
+color:#ff3b7f;
+animation:float 5s linear forwards;
 }
 
 @keyframes float{
-    0%{
-        transform:translateY(0);
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-800px);
-        opacity:0;
-    }
-}
-
-canvas{
-    position:fixed;
-    top:0;
-    left:0;
-    pointer-events:none;
+0%{transform:translateY(0);opacity:1}
+100%{transform:translateY(-800px);opacity:0}
 }
 
 </style>
@@ -148,176 +113,118 @@ canvas{
 
 <body>
 
-<canvas id="canvas"></canvas>
+<!-- MUSIC -->
+<div id="music"></div>
 
 <div class="container">
 
-    <!-- STEP 1 -->
-    <div id="step1">
-        <h1>هاي يوسف… ممكن تسامحني؟ 🤍</h1>
+<!-- STEP 1 -->
+<div id="step1">
+<h1>هاي يوسف… ممكن تسامحني؟ 🤍</h1>
 
-        <div class="buttons">
-            <button class="yes" onclick="nextStep(2)">Yes 💖</button>
-            <button class="no" id="noBtn">No 😭</button>
-        </div>
-    </div>
+<div class="buttons">
+<button class="yes" onclick="next(2); startMusic();">Yes 💖</button>
+<button class="no" id="no1">No 😭</button>
+</div>
+</div>
 
-    <!-- STEP 2 -->
-    <div id="step2" class="hidden">
-        <h1>بتحب باباك ومامتك قد ايه؟ ❤️</h1>
+<!-- STEP 2 -->
+<div id="step2" class="hidden">
+<h1>بتحب باباك ومامتك قد ايه؟ ❤️</h1>
+<input class="slider" type="range" min="0" max="100" value="100">
+<br><br>
+<button class="yes" onclick="next(3)">Next 🤍</button>
+</div>
 
-        <div class="slider-container">
-            <input type="range" min="0" max="100" value="100">
-        </div>
+<!-- STEP 3 -->
+<div id="step3" class="hidden">
+<h1>طيب… بتحبني أنا قد ايه؟ 🤍</h1>
+<input class="slider" type="range" min="0" max="100" value="100">
+<br><br>
+<button class="yes" onclick="next(4)">Next 💕</button>
+</div>
 
-        <br>
-        <button class="yes" style="position:relative;left:auto;" onclick="nextStep(3)">
-            Next 🤍
-        </button>
-    </div>
+<!-- STEP 4 -->
+<div id="step4" class="hidden">
+<h1>ممكن ننزل بكرا؟ 🥺</h1>
 
-    <!-- STEP 3 -->
-    <div id="step3" class="hidden">
-        <h1>طيب… بتحبني أنا قد ايه؟ 🤍</h1>
+<div class="buttons">
+<button class="yes" onclick="next(5)">آه طبعًا 😌</button>
+<button class="no" id="no2">No 😭</button>
+</div>
+</div>
 
-        <div class="slider-container">
-            <input type="range" min="0" max="100" value="100">
-        </div>
+<!-- STEP 5 -->
+<div id="step5" class="hidden">
+<h1>اختار الميعاد 👀</h1>
 
-        <br>
-        <button class="yes" style="position:relative;left:auto;" onclick="nextStep(4)">
-            A lot 😭💖
-        </button>
-    </div>
+<button class="yes" onclick="next(6)" style="position:relative;margin:10px;">4 PM ☕</button>
+<button class="yes" onclick="next(6)" style="position:relative;margin:10px;">6 PM 🌆</button>
+<button class="yes" onclick="next(6)" style="position:relative;margin:10px;">8 PM 🍽️</button>
+</div>
 
-    <!-- STEP 4 -->
-    <div id="step4" class="hidden">
-        <h1>طيب ممكن ننزل بكرا؟ 🥺🤍</h1>
-
-        <div class="buttons">
-            <button class="yes" onclick="nextStep(5)">آه طبعًا 😌</button>
-            <button class="no" id="noBtn2">No 😭</button>
-        </div>
-    </div>
-
-    <!-- STEP 5 -->
-    <div id="step5" class="hidden">
-        <h1>اختار الميعاد بقى 👀</h1>
-
-        <div class="time-buttons">
-            <button class="yes" onclick="nextStep(6)">4:00 PM ☕</button>
-            <button class="yes" onclick="nextStep(6)">6:00 PM 🌆</button>
-            <button class="yes" onclick="nextStep(6)">8:00 PM 🍽️</button>
-        </div>
-    </div>
-
-    <!-- FINAL -->
-    <div id="step6" class="hidden">
-        <h1 class="final-message">I Love You More 🤍</h1>
-        <p>See you tomorrow 😌✨</p>
-    </div>
+<!-- FINAL -->
+<div id="step6" class="hidden">
+<h1 class="final">I Love You More 🤍</h1>
+<p>See you tomorrow 😌✨</p>
+</div>
 
 </div>
 
 <script>
 
-// STEPS
-function nextStep(step){
+let videoId = "VIDEO_ID_HERE"; // حطي ID بتاع اغنية تباعًا تباعًا هنا
 
-    for(let i=1;i<=6;i++){
-        document.getElementById(`step${i}`).classList.add("hidden");
-    }
-
-    document.getElementById(`step${step}`).classList.remove("hidden");
-
-    createHearts();
-
+function startMusic(){
+document.getElementById("music").innerHTML = `
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}"
+allow="autoplay">
+</iframe>`;
 }
 
-// RUN HEARTS
-function createHearts(){
-
-    for(let i=0;i<20;i++){
-
-        let heart=document.createElement("div");
-
-        heart.classList.add("heart");
-
-        heart.innerHTML="💖";
-
-        heart.style.left=Math.random()*100+"vw";
-
-        heart.style.top="100vh";
-
-        heart.style.fontSize=(20+Math.random()*30)+"px";
-
-        heart.style.animationDuration=(3+Math.random()*3)+"s";
-
-        document.body.appendChild(heart);
-
-        setTimeout(()=>{
-            heart.remove();
-        },5000);
-
-    }
-
+// NAVIGATION
+function next(step){
+for(let i=1;i<=6;i++){
+let el=document.getElementById("step"+i);
+if(el) el.classList.add("hidden");
+}
+document.getElementById("step"+step).classList.remove("hidden");
+hearts();
 }
 
-// RUNAWAY BUTTON
-const noBtn=document.getElementById("noBtn");
+// HEARTS
+function hearts(){
+for(let i=0;i<20;i++){
+let h=document.createElement("div");
+h.classList.add("heart");
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.top="100vh";
+h.style.fontSize=(15+Math.random()*25)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+}
+}
 
-noBtn.addEventListener("mouseover",()=>{
+// RUNAWAY BUTTONS 😂
+function runaway(btn){
+btn.addEventListener("mouseover",()=>{
+btn.style.top=Math.random()*300+"px";
+btn.style.left=Math.random()*80+"%";
 
-    noBtn.style.top=Math.random()*80+"px";
-    noBtn.style.left=Math.random()*80+"%";
-
-    noBtn.innerHTML=[
-        "لا كدا مينفعش 😭",
-        "مش هتعرف تدوس 😌",
-        "يوسف الطيب مستحيل 😭",
-        "فكر تاني 👀"
-    ][Math.floor(Math.random()*4)];
+btn.innerHTML=[
+"لا كدا مينفعش 😂",
+"يوسف ركز 😌",
+"مش هينفع تهرب",
+"فكر تاني 👀"
+][Math.floor(Math.random()*4)];
 
 });
-
-const noBtn2=document.getElementById("noBtn2");
-
-noBtn2.addEventListener("mouseover",()=>{
-
-    noBtn2.style.top=Math.random()*80+"px";
-    noBtn2.style.left=Math.random()*80+"%";
-
-});
-
-// SIMPLE FIREWORKS
-const canvas=document.getElementById("canvas");
-const ctx=canvas.getContext("2d");
-
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-function fireworks(){
-
-    for(let i=0;i<100;i++){
-
-        ctx.beginPath();
-
-        ctx.arc(
-            Math.random()*canvas.width,
-            Math.random()*canvas.height,
-            3,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fillStyle=`hsl(${Math.random()*360},100%,70%)`;
-        ctx.fill();
-
-    }
-
 }
 
-setInterval(fireworks,1000);
+runaway(document.getElementById("no1"));
+runaway(document.getElementById("no2"));
 
 </script>
 
