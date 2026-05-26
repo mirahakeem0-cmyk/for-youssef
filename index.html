@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>For Youssef 🤍</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -22,71 +22,103 @@ overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(-45deg,#ffb6d5,#ffffff,#ffd6e7,#fff);
+background:linear-gradient(-45deg,#ffb6d5,#fff,#ffd6e7,#fff);
 background-size:400% 400%;
-animation:gradient 10s ease infinite;
+animation:grad 10s ease infinite;
 }
 
-@keyframes gradient{
+@keyframes grad{
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
 }
 
+/* CARD */
 .container{
-width:90%;
-max-width:600px;
-padding:35px;
-background:rgba(255,255,255,0.4);
+width:92%;
+max-width:500px;
+padding:25px;
+background:rgba(255,255,255,0.5);
 backdrop-filter:blur(12px);
-border-radius:25px;
-box-shadow:0 10px 40px rgba(0,0,0,0.1);
+border-radius:20px;
 text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
 position:relative;
 }
 
+/* TEXT */
 h1{
-color:#ff3b7f;
-margin-bottom:20px;
+font-size:clamp(18px,4vw,26px);
+color:#ff2f7d;
+margin-bottom:15px;
 }
 
+/* BUTTONS */
 button{
-padding:12px 25px;
+padding:12px 20px;
 border:none;
 border-radius:40px;
+font-size:14px;
 cursor:pointer;
-font-size:16px;
 transition:0.3s;
 position:absolute;
 }
 
 .yes{
-background:#ff3b7f;
+background:#ff2f7d;
 color:white;
-left:35%;
+left:25%;
 }
 
 .no{
 background:#222;
 color:white;
-left:60%;
+left:55%;
 }
 
-button:hover{
-transform:scale(1.05);
+button:active{
+transform:scale(0.95);
 }
 
 .hidden{display:none;}
 
-.buttons{height:120px;position:relative;}
+.buttons{
+height:110px;
+position:relative;
+}
 
-.slider{
+/* SLIDER */
+input[type=range]{
 width:100%;
 }
 
+/* HEARTS */
+.heart{
+position:absolute;
+font-size:18px;
+color:#ff3b7f;
+animation:float 4s linear forwards;
+}
+
+@keyframes float{
+0%{transform:translateY(0);opacity:1}
+100%{transform:translateY(-700px);opacity:0}
+}
+
+/* MEME BOX */
+.meme{
+width:100%;
+max-height:220px;
+border-radius:15px;
+margin-top:10px;
+object-fit:cover;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* FINAL */
 .final{
-font-size:2.5rem;
-color:#ff2d75;
+font-size:clamp(22px,5vw,34px);
+color:#ff1f6a;
 animation:pulse 1s infinite;
 }
 
@@ -96,75 +128,68 @@ animation:pulse 1s infinite;
 100%{transform:scale(1)}
 }
 
-.heart{
-position:absolute;
-font-size:20px;
-color:#ff3b7f;
-animation:float 5s linear forwards;
-}
-
-@keyframes float{
-0%{transform:translateY(0);opacity:1}
-100%{transform:translateY(-800px);opacity:0}
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
-<div id="music"></div>
-
 <div class="container">
 
 <!-- STEP 1 -->
-<div id="step1">
+<div id="s1">
 <h1>هاي يوسف… ممكن تسامحني؟ 🤍</h1>
 
 <div class="buttons">
-<button class="yes" onclick="next(2); startMusic();">Yes 💖</button>
+<button class="yes" onclick="go(2)">Yes 💖</button>
 <button class="no" id="no1">No 😭</button>
 </div>
 </div>
 
-<!-- STEP 2 -->
-<div id="step2" class="hidden">
+<!-- STEP 2 MEME -->
+<div id="s2" class="hidden">
 <h1>بتحب باباك ومامتك قد ايه؟ ❤️</h1>
-<input class="slider" type="range" min="0" max="100" value="100">
+
+<img class="meme" src="https://i.imgflip.com/4/4t0m5.jpg" />
+
+<input type="range" min="0" max="100" value="100">
+
 <br><br>
-<button class="yes" onclick="next(3)">Next 🤍</button>
+<button class="yes" onclick="go(3)">Next 🤍</button>
 </div>
 
-<!-- STEP 3 -->
-<div id="step3" class="hidden">
-<h1>طيب… بتحبني أنا قد ايه؟ 🤍</h1>
-<input class="slider" type="range" min="0" max="100" value="100">
+<!-- STEP 3 MEME -->
+<div id="s3" class="hidden">
+<h1>طيب بتحبني أنا قد ايه؟ 🤍</h1>
+
+<img class="meme" src="https://i.imgflip.com/2/1ur9b0.jpg" />
+
+<input type="range" min="0" max="100" value="100">
+
 <br><br>
-<button class="yes" onclick="next(4)">Next 💕</button>
+<button class="yes" onclick="go(4)">Next 💕</button>
 </div>
 
 <!-- STEP 4 -->
-<div id="step4" class="hidden">
+<div id="s4" class="hidden">
 <h1>ممكن ننزل بكرا؟ 🥺</h1>
 
 <div class="buttons">
-<button class="yes" onclick="next(5)">آه طبعًا 😌</button>
+<button class="yes" onclick="go(5)">آه طبعًا 😌</button>
 <button class="no" id="no2">No 😭</button>
 </div>
 </div>
 
 <!-- STEP 5 -->
-<div id="step5" class="hidden">
+<div id="s5" class="hidden">
 <h1>اختار الميعاد 👀</h1>
 
-<button class="yes" onclick="next(6)" style="position:relative;margin:10px;">4 PM ☕</button>
-<button class="yes" onclick="next(6)" style="position:relative;margin:10px;">6 PM 🌆</button>
-<button class="yes" onclick="next(6)" style="position:relative;margin:10px;">8 PM 🍽️</button>
+<button class="yes" onclick="go(6)" style="position:relative;margin:8px;">4 PM ☕</button>
+<button class="yes" onclick="go(6)" style="position:relative;margin:8px;">6 PM 🌆</button>
+<button class="yes" onclick="go(6)" style="position:relative;margin:8px;">8 PM 🍽️</button>
 </div>
 
 <!-- FINAL -->
-<div id="step6" class="hidden">
+<div id="s6" class="hidden">
 <h1 class="final">I Love You More 🤍</h1>
 <p>See you tomorrow 😌✨</p>
 </div>
@@ -173,45 +198,33 @@ animation:float 5s linear forwards;
 
 <script>
 
-let videoId = "VIDEO_ID_HERE"; // حطي ID بتاع اغنية تباعًا تباعًا هنا
-
-function startMusic(){
-document.getElementById("music").innerHTML = `
-<iframe width="0" height="0"
-src="https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}"
-allow="autoplay">
-</iframe>`;
-}
-
 // NAVIGATION
-function next(step){
+function go(n){
 for(let i=1;i<=6;i++){
-let el=document.getElementById("step"+i);
-if(el) el.classList.add("hidden");
+document.getElementById("s"+i).classList.add("hidden");
 }
-document.getElementById("step"+step).classList.remove("hidden");
+document.getElementById("s"+n).classList.remove("hidden");
 hearts();
 }
 
 // HEARTS
 function hearts(){
-for(let i=0;i<20;i++){
+for(let i=0;i<15;i++){
 let h=document.createElement("div");
-h.classList.add("heart");
+h.className="heart";
 h.innerHTML="💖";
 h.style.left=Math.random()*100+"vw";
 h.style.top="100vh";
-h.style.fontSize=(15+Math.random()*25)+"px";
 document.body.appendChild(h);
-setTimeout(()=>h.remove(),5000);
+setTimeout(()=>h.remove(),4000);
 }
 }
 
 // RUNAWAY BUTTONS 😂
 function runaway(btn){
 btn.addEventListener("mouseover",()=>{
-btn.style.top=Math.random()*300+"px";
-btn.style.left=Math.random()*80+"%";
+btn.style.top=Math.random()*250+"px";
+btn.style.left=Math.random()*70+"%";
 
 btn.innerHTML=[
 "لا كدا مينفعش 😂",
@@ -219,7 +232,6 @@ btn.innerHTML=[
 "مش هينفع تهرب",
 "فكر تاني 👀"
 ][Math.floor(Math.random()*4)];
-
 });
 }
 
